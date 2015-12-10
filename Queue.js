@@ -52,7 +52,7 @@ console.log(q.back());
 console.log(q.empty());*/
 
 //应用实例
-var dancer = [{'sex':'F','name':'gege1'},
+/*var dancer = [{'sex':'F','name':'gege1'},
 {'sex':'F','name':'gege2'},
 {'sex':'F','name':'gege3'},
 {'sex':'F','name':'gege4'},
@@ -86,4 +86,34 @@ function dance(males,females){
 	}else{
 		console.log(males.front().name+'先生需要等待。');
 	}
+};*/
+
+//数字排序
+var myqueue = []; 
+for(var i = 0;i < 10;i++){	//创建十个队列
+	myqueue[i] = new Queue();
+}
+var num = [91,46,85,15,92,25,31,22];
+function Distribute(num,myqueue,digit){ //digit个位或十位上的值
+	var len = num.length;
+	for(var i = 0; i < len; i++){
+		if(digit == 1){
+			myqueue[num[i] % 10].enqueue(num[i]);
+		}else{
+			myqueue[Math.floor(num[i] / 10)].enqueue(num[i]);
+		}
+	}
 };
+function collect(myqueue,num){
+	var i = 0,len = myqueue.length,x = 0;
+	for(; i < len; i++){
+		while(!myqueue[i].empty()){
+			num[x++] = myqueue[i].dequeue();
+		}
+	}
+}
+Distribute(num,myqueue,1);
+collect(myqueue,num);
+Distribute(num,myqueue,0);
+collect(myqueue,num);
+
